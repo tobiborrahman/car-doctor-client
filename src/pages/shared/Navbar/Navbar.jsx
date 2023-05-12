@@ -1,7 +1,18 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
+import { useContext } from 'react';
+import { AuthContext } from '../../../Providers/AuthProvider';
 
 const Navbar = () => {
+	const { user, logOut } = useContext(AuthContext);
+
+	const handleLogOut = () => {
+		logOut()
+			.then(() => {})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	return (
 		<div className="navbar bg-base-100 h-28 my-5">
 			<div className="navbar-start">
@@ -83,6 +94,25 @@ const Navbar = () => {
 						<Link className="text-[#444444]" to="/contact">
 							Contact
 						</Link>
+					</li>
+					<li className="text-1xl font-bold">
+						{user?.email ? (
+							<>
+								<Link className="text-[#444444]" to="/bookings">
+									My Bookings
+								</Link>
+								<button
+									onClick={handleLogOut}
+									className="text-[#444444]"
+								>
+									Log Out
+								</button>
+							</>
+						) : (
+							<Link className="text-[#444444]" to="/login">
+								Login
+							</Link>
+						)}
 					</li>
 				</ul>
 			</div>
