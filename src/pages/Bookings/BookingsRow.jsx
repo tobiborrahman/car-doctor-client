@@ -1,5 +1,3 @@
-import { space } from 'postcss/lib/list';
-
 const BookingsRow = ({ booking, handleDelete, handleBookingConfirm }) => {
 	const { _id, service, img, price, date, status } = booking;
 

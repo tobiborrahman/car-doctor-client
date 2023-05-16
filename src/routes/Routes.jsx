@@ -26,9 +26,15 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/checkout/:id',
-				element: <CheckOut></CheckOut>,
+				element: (
+					<PrivateRoute>
+						<CheckOut></CheckOut>
+					</PrivateRoute>
+				),
 				loader: ({ params }) =>
-					fetch(`http://localhost:5000/services/${params.id}`),
+					fetch(
+						`https://car-doctor-server-tobibur2021.vercel.app/services/${params.id}`
+					),
 			},
 			{
 				path: '/bookings',
